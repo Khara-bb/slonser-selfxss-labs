@@ -1,0 +1,40 @@
+services:
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "8443:8443"
+      - "8444:8444"
+      - "8445:8445"
+      - "8446:8446"
+      - "8447:8447"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./attack:/srv/attack:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - attacker-server-js
+      - attacker-server-py
+      - victim-site
+      - websocket-server
+  
+  attacker-server-js:
+    build: ./attacker
+    ports:
+      - "5000"
+
+  victim-site:
+    build: ./backend
+    ports:
+      - "8000"
+  
+  websocket-server:
+    build: ./ws
+    ports:
+      - "3000"
+    stdin_open: true
+    tty: true
+
+volumes:
+  caddy_data:
+  caddy_config:

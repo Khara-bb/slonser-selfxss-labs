@@ -1,0 +1,29 @@
+:8443 {
+    reverse_proxy victim-site:8000
+    tls internal {
+        on_demand
+    }
+}
+
+:8444 {
+    root * /srv/attack
+    file_server
+    tls internal {
+        on_demand
+    }
+}
+
+:8445 {
+    reverse_proxy websocket-server:3000
+    tls internal {
+        on_demand
+    }
+}
+
+:8446 {
+    reverse_proxy attacker-server-js:5000
+    tls internal {
+        on_demand
+    }
+}
+
