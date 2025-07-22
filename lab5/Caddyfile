@@ -1,0 +1,26 @@
+# Backend application on port 8443
+:8443 {
+    reverse_proxy app:3000
+    tls internal {
+        on_demand
+    }
+}
+
+# Attack server on port 8444 - serve static files directly
+:8444 {
+    root * /srv/attack
+    file_server
+    tls internal {
+        on_demand
+    }
+}
+
+# WebSocket server on port 8445
+:8445 {
+    reverse_proxy websocket-server:3004
+    tls internal {
+        on_demand
+    }
+}
+
+
