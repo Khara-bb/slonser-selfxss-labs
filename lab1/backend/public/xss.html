@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+  setTimeout(() => {
+    try {
+      window.top[1].alert(window.top[1].document.cookie);
+    } catch (e) {
+      console.error(e);
+    }
+  }, 1000);
+</script>
+</body>
+</html>
