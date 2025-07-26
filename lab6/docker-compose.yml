@@ -14,7 +14,6 @@ services:
       - caddy_config:/config
     depends_on:
       - attacker-server-js
-      - attacker-server-py
       - victim-site
       - websocket-server
   
