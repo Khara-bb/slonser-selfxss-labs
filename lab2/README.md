@@ -1,4 +1,4 @@
-# Self-XSS + CSFR login Chain Exploit Lab
+# Self-XSS + CSRF login Chain Exploit Lab
 
 This lab demonstrates a self xss CSRF chain chain can be abused with credentialless iframes.
 
