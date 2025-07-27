@@ -1,5 +1,7 @@
 Based on slonser's blog post https://blog.slonser.info/posts/make-self-xss-great-again/
 
+Check the video I created to walk through the article and the labs : https://www.youtube.com/watch?v=bnGTpfXKrek
+
 # Lab 1 - Credentialless iframe
 
 This lab demonstrates a self xss that can be abused with credentialless iframes.
